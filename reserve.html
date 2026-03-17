@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>予約案内 | inimu Workshop Guide</title>
+    <meta name="description" content="inimu ワークショップの予約フォームです。カレンダーで日付を選び、時間帯を指定して予約内容を確認できます。">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a class="skip-link" href="#main-content">本文へ移動</a>
+
+    <header class="header">
+        <div class="container header__inner">
+            <a href="index.html" class="header__logo">inimu Workshop Guide</a>
+
+            <button class="header__toggle" aria-label="メニューを開く" aria-controls="global-nav" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+
+            <nav class="header__nav" id="global-nav" aria-label="グローバルナビゲーション">
+                <ul class="header__list">
+                    <li><a href="index.html">トップ</a></li>
+                    <li><a href="workshops.html">ワークショップ一覧</a></li>
+                    <li><a href="beginners.html">初めての方へ</a></li>
+                    <li><a href="access.html">アクセス</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a class="button button--small" href="reserve.html">予約する</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" class="page-main">
+        <section class="page-header">
+            <div class="container">
+                <p class="section-heading__sub">Reserve</p>
+                <h1>予約フォーム</h1>
+                <p>カレンダーから日付を選び、ご希望の時間帯を指定して予約内容を確認できます。</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container reserve-layout">
+                <!-- 左側：予約フォーム -->
+                <div class="reserve-panel card">
+                    <div class="section-heading">
+                        <h2>予約内容を選ぶ</h2>
+                        <p>月・日付・時間帯を選択してください。</p>
+                    </div>
+
+                    <!-- 月切り替え付きカレンダー -->
+                    <div class="calendar-box">
+                        <div class="calendar-header">
+                            <button type="button" class="calendar-nav" id="prevMonth" aria-label="前の月へ">←</button>
+                            <h3 id="calendarTitle" class="calendar-title">2026年3月</h3>
+                            <button type="button" class="calendar-nav" id="nextMonth" aria-label="次の月へ">→</button>
+                        </div>
+
+                        <div class="calendar-weekdays" aria-hidden="true">
+                            <span>日</span>
+                            <span>月</span>
+                            <span>火</span>
+                            <span>水</span>
+                            <span>木</span>
+                            <span>金</span>
+                            <span>土</span>
+                        </div>
+
+                        <div class="calendar-grid" id="calendarGrid"></div>
+                    </div>
+
+                    <!-- 月スライダー -->
+                    <div class="reserve-field">
+                        <label for="monthRange" class="reserve-label">月を選ぶ</label>
+                        <input type="range" id="monthRange" min="0" max="11" step="1" value="0" class="reserve-range">
+                        <p class="reserve-help">選択中の月：<span id="monthRangeValue">1月</span></p>
+                    </div>
+
+                    <!-- 日付スライダー -->
+                    <div class="reserve-field">
+                        <label for="dayRange" class="reserve-label">日にちを選ぶ</label>
+                        <input type="range" id="dayRange" min="1" max="31" step="1" value="1" class="reserve-range">
+                        <p class="reserve-help">選択中の日にち：<span id="dayRangeValue">1日</span></p>
+                    </div>
+
+                    <!-- 時間スライダー -->
+                    <div class="reserve-field">
+                        <label for="timeRange" class="reserve-label">時間帯を選ぶ</label>
+                        <input type="range" id="timeRange" min="0" max="2" step="1" value="0" class="reserve-range">
+                        <div class="time-scale">
+                            <span>10時〜12時</span>
+                            <span>14時〜16時</span>
+                            <span>18時〜19時</span>
+                        </div>
+                        <p class="reserve-help">選択中の時間帯：<span id="timeRangeValue">10時〜12時</span></p>
+                    </div>
+
+                    <!-- フォーム -->
+                    <form class="reserve-form" id="reserveForm">
+                        <div class="reserve-form__grid">
+                            <div class="reserve-field">
+                                <label for="name" class="reserve-label">お名前</label>
+                                <input type="text" id="name" name="name" class="reserve-input" placeholder="例：山田 花子">
+                            </div>
+
+                            <div class="reserve-field">
+                                <label for="email" class="reserve-label">メールアドレス</label>
+                                <input type="email" id="email" name="email" class="reserve-input"
+                                    placeholder="example@email.com">
+                            </div>
+                        </div>
+
+                        <div class="reserve-form__grid">
+                            <div class="reserve-field">
+                                <label for="workshop" class="reserve-label">希望メニュー</label>
+                                <select id="workshop" name="workshop" class="reserve-input">
+                                    <option>オリジナル香水づくり体験</option>
+                                    <option>ディフューザーづくり体験</option>
+                                    <option>季節限定ワークショップ</option>
+                                </select>
+                            </div>
+
+                            <div class="reserve-field">
+                                <label for="people" class="reserve-label">人数</label>
+                                <select id="people" name="people" class="reserve-input">
+                                    <option>1名</option>
+                                    <option>2名</option>
+                                    <option>3名</option>
+                                    <option>4名</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="reserve-field">
+                            <label for="message" class="reserve-label">備考</label>
+                            <textarea id="message" name="message" rows="4" class="reserve-input"
+                                placeholder="ご質問やご要望があればご記入ください。"></textarea>
+                        </div>
+
+                        <button type="submit" class="button reserve-submit">予約内容を確認する</button>
+                    </form>
+                </div>
+
+                <!-- 右側：選択内容表示 -->
+                <aside class="reserve-summary card" aria-live="polite">
+                    <div class="section-heading">
+                        <h2>選択中の予約内容</h2>
+                    </div>
+
+                    <dl class="reserve-summary__list">
+                        <div>
+                            <dt>月</dt>
+                            <dd id="summaryMonth">1月</dd>
+                        </div>
+                        <div>
+                            <dt>日付</dt>
+                            <dd id="summaryDay">1日</dd>
+                        </div>
+                        <div>
+                            <dt>時間帯</dt>
+                            <dd id="summaryTime">10時〜12時</dd>
+                        </div>
+                        <div>
+                            <dt>メニュー</dt>
+                            <dd id="summaryWorkshop">オリジナル香水づくり体験</dd>
+                        </div>
+                        <div>
+                            <dt>人数</dt>
+                            <dd id="summaryPeople">1名</dd>
+                        </div>
+                    </dl>
+
+                    <div class="reserve-note">
+                        <p>このページは改善提案用のサンプルです。実運用時は外部予約システムまたは送信処理と連携してください。</p>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container cta-section__inner">
+                <h2>予約の一歩を、もっと分かりやすく</h2>
+                <p>カレンダー・日付・時間帯を見ながら、迷わず予約できる体験を目指したサンプルです。</p>
+                <div class="hero__buttons">
+                    <a class="button" href="workshops.html">体験メニューを見直す</a>
+                    <a class="button button--sub button--light" href="faq.html">FAQを見る</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <div>
+                <p class="footer__logo">inimu Workshop Guide</p>
+                <p>香りのものづくり体験を、もっと分かりやすく。</p>
+            </div>
+            <nav aria-label="フッターナビゲーション">
+                <ul class="footer__list">
+                    <li><a href="workshops.html">ワークショップ一覧</a></li>
+                    <li><a href="beginners.html">初めての方へ</a></li>
+                    <li><a href="access.html">アクセス</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="reserve.html">予約案内</a></li>
+                </ul>
+            </nav>
+        </div>
+        <p class="footer__copy">&copy; 2026 inimu Workshop Guide Sample</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
